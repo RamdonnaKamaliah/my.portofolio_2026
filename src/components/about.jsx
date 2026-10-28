@@ -1,4 +1,3 @@
-import donnaImg from '../assets/donna.png';
 
 function About (){
     return(
@@ -13,7 +12,7 @@ function About (){
                     <div className="absolute inset-0 border-2 border-primary rounded-2xl translate-x-4 translate-y-4 z-0"></div>
 
                     <div className="relative z-10 bg-white rounded-2xl border-2 border-surface overflow-hidden h-full w-full shadow-lg">
-                        <img src={donnaImg} alt="foto-dona" className="w-full h-full object-cover" />
+                        <img src="/img/nana(1).png" alt="foto-dona" className="w-full h-full object-cover" />
                     </div>  
 
                     <div className="absolute z-20 bg-surface rounded-t-2xl overflow-hidden h-12 w-full px-4 py-3 top-0 flex items-center justify-between">
@@ -33,14 +32,17 @@ function About (){
                     <h1 className="font-semibold text-xl text-ink">Developer | IT Support</h1>
                     
                     <p className="text-md text-ink">
-                        Hi there! I’m a passionate coder girl who believes in the beauty of clean code and seamless user experiences. I love building fast, neat, and intuitive web applications. While I appreciate good design, my true strength lies in backend development and database management—honed during my previous role as an IT Web Support where I extensively worked with SQL.
+                        Hi there! I’m a passionate coder girl who believes in the beauty of clean code and seamless user experiences. I love building fast, neat, and intuitive web applications. While I appreciate good design, my true strength lies in backend development and database management honed during my previous role as an IT Web Support where I extensively worked with SQL.
                     </p>    
                     
-                    <div className="w-full px-4 py-5 border-2 border-surface shadow-lg rounded-2xl flex flex-col gap-2">
-                        <p className="text-ink/60">Lokasi: ...</p>
-                        <p className="text-ink/60">Stack: PHP, Laravel, React, SQL, dll</p>
-                        <p className="text-ink/60">Side Project: Dflorar</p>
-                    </div>
+                  <div className="w-full px-6 py-6 border-l-4 border-primary bg-surface/50 shadow-sm rounded-r-2xl flex flex-col gap-3">
+  <span className="text-4xl text-primary/30 font-serif leading-none -mb-4">“</span>
+  <p className="text-ink/80 text-sm sm:text-base italic leading-relaxed">
+    "Bagi saya, menulis kode bukan hanya tentang membuat aplikasi berfungsi, melainkan tentang merancang solusi yang bersih, efisien, dan siap menghadapi tantangan masa depan."
+  </p>
+  
+</div>
+
                 </div>
             </div>
         </section>
