@@ -165,7 +165,7 @@ export default function Hero() {
           </p>
 
           <h1 className="text-4xl sm:text-5xl font-semibold text-ink leading-tight">
-            Hai, I <span className="text-primary">Donna</span>
+            Hai, I'm <span className="text-primary">Donna</span>
           </h1>
 
           <p className="font-mono text-sm text-ink/60 mt-2">
