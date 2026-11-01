@@ -2,7 +2,7 @@ function Experience() {
     return(
         <section id="experience" className="max-w-6xl mx-auto px-4 sm:px-8 py-16">
             <div>
-                <h2 className="ont-mono text-ink/60 text-sm">05 / Experience</h2>
+                <h2 className="font-mono text-ink/60 text-sm">05 / Experience</h2>
             </div>
 
         {/* BENTANG */}
