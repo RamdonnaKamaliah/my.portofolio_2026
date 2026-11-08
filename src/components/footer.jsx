@@ -14,11 +14,19 @@ function Footer(){
         <div className="pt-6 grid grid-cols-2 md:grid-cols-2 justify-between">
             <p className="text-accent text-sm font-mono">donna@portfolio:~$</p>
             <div className="flex flex-wrap gap-4 md:justify-self-end">
-                <a href="#" className="font-mono text-sm text-ink/60">Instagram</a>
-                <a href="#" className="font-mono text-sm text-ink/60">GIthub</a>
-                <a href="#" className="font-mono text-sm text-ink/60">Linkedin</a>
+                <a href="#" className="font-mono text-sm text-ink/60 hover:text-primary">Instagram</a>
+                <a href="#" className="font-mono text-sm text-ink/60 hover:text-primary">GIthub</a>
+                <a href="#" className="font-mono text-sm text-ink/60 hover:text-primary">Linkedin</a>
             </div>
         </div>
+
+        <div className="border border-ink/60 w-full mt-4"></div>
+
+            <div className="mt-4 flex justify-between items-center text-sm text-ink/60 font-mono">
+                <p>© 2026 Donna</p>
+                <p>Update at 8 Nov 2026</p>
+            </div>
+
 
         </section>
     );

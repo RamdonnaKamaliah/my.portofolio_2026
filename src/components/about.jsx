@@ -12,7 +12,7 @@ function About (){
                     <div className="absolute inset-0 border-2 border-primary rounded-2xl translate-x-4 translate-y-4 z-0"></div>
 
                     <div className="relative z-10 bg-white rounded-2xl border-2 border-surface overflow-hidden h-full w-full shadow-lg">
-                        <img src="/img/nana(1).png" alt="foto-dona" className="w-full h-full object-cover" />
+                        <img src="/img/my_foto.jpeg" alt="foto-dona" className="w-full h-full object-cover" />
                     </div>  
 
                     <div className="absolute z-20 bg-surface rounded-t-2xl overflow-hidden h-12 w-full px-4 py-3 top-0 flex items-center justify-between">
