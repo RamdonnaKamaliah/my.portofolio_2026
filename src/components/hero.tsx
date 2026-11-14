@@ -1,33 +1,26 @@
 import React, { useState, useRef } from "react";
-import Experience from "./experience";
+
+interface OutputLine {
+  text: string;
+  type: string;
+}
 
 function Terminal() {
-  // State untuk menyimpan baris text output terminal
-  const [output, setOutput] = useState([
+  const [output, setOutput] = useState<OutputLine[]>([
     { text: 'Selamat datang! Ketik "help" untuk mulai.', type: "text-code-text/60" }
   ]);
-  // State untuk input teks saat ini
-  const [inputValue, setInputValue] = useState("");
-  // State untuk history command
-  const [history, setHistory] = useState([]);
-  const [historyIndex, setHistoryIndex] = useState(0);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [history, setHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState<number>(0);
 
-  // Ref untuk manipulasi scroll & focus otomatis
-  const inputRef = useRef(null);
-  const outputEndRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const outputEndRef = useRef<HTMLDivElement>(null);
 
-  // Auto-scroll ke paling bawah setiap ada baris baru di terminal
-  // useEffect(() => {
-  //   outputEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  // }, [output]);
-
-  // Fungsi scroll ke section lain di page
-  const scrollToSection = (id) => {
+  const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // List perintah/commands
-  const commands = {
+  const commands: Record<string, () => string[] | null> = {
     help: () => ["Perintah: about, projects, skills, experience, contact, theme, clear"],
     about: () => {
       scrollToSection("about");
@@ -39,7 +32,7 @@ function Terminal() {
     },
     experience: () => {
       scrollToSection("experience");
-      return ["Membuka ~experience ..."]
+      return ["Membuka ~experience ..."];
     },
     projects: () => {
       scrollToSection("projects");
@@ -50,7 +43,6 @@ function Terminal() {
       return ["Membuka ~/contact ..."];
     },
     theme: () => {
-      if (typeof toggleTheme === "function") toggleTheme(); 
       return ["Tema diganti."];
     },
     clear: () => {
@@ -59,21 +51,18 @@ function Terminal() {
     },
   };
 
-  // Handler Submit Form Terminal
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const raw = inputValue.trim();
     if (!raw) return;
 
-    // Update history
     const newHistory = [...history, raw];
     setHistory(newHistory);
     setHistoryIndex(newHistory.length);
 
-    // Tambah baris command ke output
-    let newLines = [{ text: "$ " + raw, type: "text-code-str" }];
-
+    let newLines: OutputLine[] = [{ text: "$ " + raw, type: "text-code-str" }];
     const cmd = raw.toLowerCase();
+
     if (Object.hasOwn(commands, cmd)) {
       const result = commands[cmd]();
       if (result !== null) {
@@ -85,11 +74,10 @@ function Terminal() {
       setOutput((prev) => [...prev, ...newLines]);
     }
 
-    setInputValue(""); // Reset kolom input
+    setInputValue("");
   };
 
-  // Handler Key ArrowUp & ArrowDown untuk History
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "ArrowUp") {
       e.preventDefault();
       if (historyIndex > 0) {
@@ -112,29 +100,23 @@ function Terminal() {
       onClick={() => inputRef.current?.focus()}
       className="bg-code-bg text-code-text font-mono text-xs sm:text-sm rounded-xl border border-ink/15 px-5 py-4 h-64 flex flex-col cursor-text"
     >
-      {/* Tombol Tiga Warna Khas Mac/Terminal */}
       <div className="flex gap-2 mb-3">
         <span className="w-3 h-3 rounded-full bg-primary inline-block"></span>
         <span className="w-3 h-3 rounded-full bg-accent inline-block"></span>
         <span className="w-3 h-3 rounded-full bg-code-text inline-block"></span>
       </div>
 
-      {/* Output Area */}
       <div className="flex-1 overflow-y-auto space-y-1" aria-live="polite">
         {output.map((line, index) => (
           <div key={index} className={line.type}>
             {line.text}
           </div>
         ))}
-        {/* Anchor untuk auto-scroll */}
         <div ref={outputEndRef} />
       </div>
 
-      {/* Form Input */}
       <form onSubmit={handleSubmit} className="flex gap-2 pt-2">
-        <label htmlFor="term-input" className="text-code-str">
-          $
-        </label>
+        <label htmlFor="term-input" className="text-code-str">$</label>
         <input
           id="term-input"
           ref={inputRef}
@@ -154,11 +136,14 @@ function Terminal() {
 }
 
 
-export default function Hero() {
+interface HeroProps {}
+
+
+export default function Hero({}: HeroProps) {
   return (
     <section id="home" className="max-w-6xl mx-auto px-4 sm:px-8 py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-        {/* Kolom Kiri: Teks & Keterangan */}
+        
         <div className="flex flex-col justify-center">
           <p className="font-mono text-sm text-accent mb-3">
             &gt; hello, world<span className="animate-blink">_</span>
@@ -190,7 +175,8 @@ export default function Hero() {
 
           <div className="flex flex-wrap gap-3 mt-7">
             <a
-              href="#"
+              href="/cv-ramdona.pdf"
+              download="CV_Siti_Kamaliah_Ramdona.pdf"
               className="inline-flex items-center gap-2 bg-primary text-on-primary px-5 py-2.5 rounded-xl text-sm font-medium transition hover:shadow-glow hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               Download CV
@@ -207,6 +193,7 @@ export default function Hero() {
         <div className="flex flex-col justify-center">
           <Terminal />
         </div>
+
       </div>
     </section>
   );
