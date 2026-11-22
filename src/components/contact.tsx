@@ -1,8 +1,19 @@
-import { useState } from 'react'
+import { useState, type ChangeEvent, type FormEvent } from 'react'
 
-const EMAIL = 'ramdonakamaliah@gmail.com' 
+interface SocialLink {
+  label: string
+  href: string
+}
 
-const SOCIALS = [
+interface ContactForm {
+  name: string
+  email: string
+  message: string
+}
+
+const EMAIL = 'ramdonakamaliah@gmail.com'
+
+const SOCIALS: SocialLink[] = [
   { label: 'GitHub', href: 'https://github.com/USERNAME' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/in/USERNAME' },
   { label: 'Instagram', href: 'https://www.instagram.com/USERNAME' },
@@ -12,10 +23,14 @@ const inputClass =
   'w-full bg-transparent py-1.5 font-mono text-sm text-ink outline-none placeholder:text-ink/40'
 
 export default function Contact() {
-  const [copied, setCopied] = useState(false)
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
+  const [copied, setCopied] = useState<boolean>(false)
+  const [form, setForm] = useState<ContactForm>({
+    name: '',
+    email: '',
+    message: '',
+  })
 
-  async function copyEmail() {
+  async function copyEmail(): Promise<void> {
     try {
       await navigator.clipboard.writeText(EMAIL)
       setCopied(true)
@@ -26,14 +41,19 @@ export default function Contact() {
   }
 
   // satu fungsi untuk semua input, dibedakan lewat atribut `name`
-  function handleChange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value })
+  function handleChange(
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void {
+    const { name, value } = e.target
+    setForm((prev) => ({ ...prev, [name]: value }))
   }
 
-  function handleSubmit(e) {
+  function handleSubmit(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault() // cegah halaman refresh
     const subject = encodeURIComponent(`Halo Donna, ini ${form.name}`)
-    const body = encodeURIComponent(`${form.message}\n\n${form.name} (${form.email})`)
+    const body = encodeURIComponent(
+      `${form.message}\n\n${form.name} (${form.email})`
+    )
     window.location.href = `mailto:${EMAIL}?subject=${subject}&body=${body}`
   }
 
@@ -93,26 +113,68 @@ export default function Contact() {
             <span className="h-2.5 w-2.5 rounded-full bg-primary" />
             <span className="h-2.5 w-2.5 rounded-full bg-accent" />
             <span className="h-2.5 w-2.5 rounded-full bg-ink/50" />
-            <span className="ml-2 font-mono text-xs text-ink/60">send-message.sh</span>
+            <span className="ml-2 font-mono text-xs text-ink/60">
+              send-message.sh
+            </span>
           </div>
 
           <div className="space-y-1 p-4 sm:p-5">
             <div className="flex items-baseline gap-3 border-b border-ink/15">
-              <label htmlFor="c-name" className="w-20 shrink-0 font-mono text-xs text-accent">name:</label>
-              <input id="c-name" name="name" required value={form.name} onChange={handleChange}
-                     autoComplete="name" placeholder="your name" className={inputClass} />
+              <label
+                htmlFor="c-name"
+                className="w-20 shrink-0 font-mono text-xs text-accent"
+              >
+                name:
+              </label>
+              <input
+                id="c-name"
+                name="name"
+                required
+                value={form.name}
+                onChange={handleChange}
+                autoComplete="name"
+                placeholder="your name"
+                className={inputClass}
+              />
             </div>
 
             <div className="flex items-baseline gap-3 border-b border-ink/15">
-              <label htmlFor="c-email" className="w-20 shrink-0 font-mono text-xs text-accent">email:</label>
-              <input id="c-email" name="email" type="email" required value={form.email} onChange={handleChange}
-                     autoComplete="email" placeholder="your email" className={inputClass} />
+              <label
+                htmlFor="c-email"
+                className="w-20 shrink-0 font-mono text-xs text-accent"
+              >
+                email:
+              </label>
+              <input
+                id="c-email"
+                name="email"
+                type="email"
+                required
+                value={form.email}
+                onChange={handleChange}
+                autoComplete="email"
+                placeholder="your email"
+                className={inputClass}
+              />
             </div>
 
             <div className="flex items-start gap-3 border-b border-ink/15">
-              <label htmlFor="c-message" className="mt-2 w-20 shrink-0 font-mono text-xs text-accent">message:</label>
-              <textarea id="c-message" name="message" required rows={4} value={form.message} onChange={handleChange}
-                        placeholder="write your message" className={`${inputClass} resize-none`} />
+              <label
+                htmlFor="c-message"
+                className="mt-2 w-20 shrink-0 font-mono text-xs text-accent"
+              >
+                message:
+              </label>
+              <textarea
+                id="c-message"
+                name="message"
+                required
+                rows={4}
+                value={form.message}
+                onChange={handleChange}
+                placeholder="write your message"
+                className={`${inputClass} resize-none`}
+              />
             </div>
 
             <div className="pt-4">

@@ -154,7 +154,7 @@ export default function Hero({}: HeroProps) {
           </h1>
 
           <p className="font-mono text-sm text-ink/60 mt-2">
-            Web Developer | IT Support
+            Web Developer | Fullstack
           </p>
 
           <p className="max-w-md text-ink/70 leading-relaxed mt-4">

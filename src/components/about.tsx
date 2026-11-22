@@ -36,10 +36,20 @@ function About (){
                     </p>    
                     
                   <div className="w-full px-6 py-6 border-l-4 border-primary bg-surface/50 shadow-sm rounded-r-2xl flex flex-col gap-3">
-  <span className="text-4xl text-primary/30 font-serif leading-none -mb-4">“</span>
-  <p className="text-ink/80 text-sm sm:text-base italic leading-relaxed">
-    "Bagi saya, menulis kode bukan hanya tentang membuat aplikasi berfungsi, melainkan tentang merancang solusi yang bersih, efisien, dan siap menghadapi tantangan masa depan."
-  </p>
+
+
+        <p className="text-xs text-slate-400 mb-6">Find out interesting facts about me</p>
+
+        <div id="fact-box" className="bg-slate-900 border border-slate-700 p-4 rounded-xl min-h-[10px] flex items-center justify-center text-sm text-slate-300 mb-6">
+            Click the button below
+        </div>
+
+        <button 
+            id="fetch-btn" 
+            className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2.5 rounded-xl text-sm font-semibold transition shadow-lg"
+        >
+            Get New Facts 🐾
+        </button>
   
 </div>
 
